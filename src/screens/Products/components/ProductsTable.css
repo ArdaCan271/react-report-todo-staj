@@ -33,6 +33,10 @@ th.sticky-header {
   z-index: 2; /* Ensures the sticky column is above other table content */
 }
 
+td.numeric-detail {
+  text-align: right;
+}
+
 td.sticky-detail {
   position: sticky;
   right: -2px;

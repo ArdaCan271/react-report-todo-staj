@@ -7,27 +7,6 @@
   background-color: #fff;
 }
 
-.home-button{
-  position: absolute;
-  left: 20px;
-  top: 20px;
-  background-color: rgb(241, 241, 241);
-  border: 1px solid gray;
-  color: #333333;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  column-gap: 5px;
-  padding: 5px;
-  font-size: 16px;
-  font-weight: bold;
-  border-radius: 4px;
-} .home-button:hover {
-  cursor: pointer;
-} .home-button:active {
-  background-color: rgb(221, 221, 221);
-}
-
 #products-report-container {
   display: flex;
   flex-direction: column;
@@ -322,14 +301,33 @@
   overflow: scroll;
   min-height: 25vh;
   margin-top: 10px;
+  position: relative;
 }
 
-#table-placeholder {
+#table-placeholder-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 25vh;
   font-size: 24px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+}
+
+#table-placeholder {
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  height: 40%;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
 }
 
 #refresh-and-pagination {

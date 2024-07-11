@@ -1,0 +1,19 @@
+.clear-all-filters-button {
+  margin-left: 60px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  cursor: pointer;
+  padding: 2px;
+  padding-right: 3px;
+  background-color: rgb(241, 241, 241);
+  border-radius: 3px;
+  border: 1px solid gray;
+  z-index: 2;
+  border-bottom: none;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  box-shadow: 0px 2px 0 rgb(241, 241, 241);
+} .clear-all-filters-button:active {
+  background-color: rgb(221, 221, 221);
+}

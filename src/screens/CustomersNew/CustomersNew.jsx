@@ -9,6 +9,7 @@ import columns from './data/columns';
 
 import Table from './components/Table';
 import { FaChevronRight, FaChevronLeft } from 'react-icons/fa';
+import HomeButton from '../../components/HomeButton/HomeButton';
 
 const CustomersNew = () => {
   const navigate = useNavigate();
@@ -96,68 +97,7 @@ const CustomersNew = () => {
 
   return (
     <div id='customersnew-container'>
-      <div id='filters-section'>
-        <div id='filters-expand-section'>
-          <div id='filters-expand-button' onClick={handleExpandClick}>
-            Filtreler
-            {boxesVisible ?
-              <FaChevronLeft style={{ marginLeft: 5 }} fontSize={10} /> :
-              <FaChevronRight style={{ marginLeft: 5 }} fontSize={10} />
-            }
-          </div>
-          {boxesVisible &&
-            <div id='filters-checkboxes'>
-              {columns.map((column, index) => (
-                <div key={index} className='filter-checkbox-container'>
-                  <form>
-                    <input
-                      type='checkbox'
-                      className='filter-checkbox-button'
-                      checked={visibleFilters.includes(column.header)}
-                      onChange={() => visibleFilters.includes(column.header) ?
-                        setVisibleFilters(visibleFilters.filter(item => item !== column.header)) :
-                        setVisibleFilters([...visibleFilters, column.header])
-                      }
-                    />
-                  </form>
-                  <div className='filter-checkbox-title'>{column.header}</div>
-                </div>
-              ))}
-            </div>
-          }
-        </div>
-        <div style={{ width: "100%", display: "flex", justifyContent: "flex-start", alignItems: "center", marginBottom: 10, marginTop: 10 }}>
-          <div id='filter-inputs-section'>
-            {columns.map((column, index) => (
-              visibleFilters.includes(column.header) ?
-                <input
-                  key={index}
-                  type='text'
-                  name={column.accessorKey}
-                  className='filter-input'
-                  placeholder={`${column.header}...`}
-                  value={inputs.find(input => input.id === column.accessorKey)?.value || ''}
-                  onChange={handleFilterInputChange}
-                />
-                :
-                null
-            ))}
-          </div>
-          <div
-            id='filter-search-button'
-            onClick={onSearchClick}
-          >
-            <AiOutlineSearch />
-          </div>
-          <div
-            id='customernew-refresh-button'
-            onClick={onRefreshClick}
-          >
-            <AiOutlineSync />
-          </div>
-        </div>
-
-      </div>
+      <HomeButton/>  
       <div id='customernew-card'>
         <div id='table-container'>
           <table className='w3-table-all my-table-style'>

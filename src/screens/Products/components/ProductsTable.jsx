@@ -112,7 +112,11 @@ const ProductsTable = ({ data, columns, sorting, setSorting, columnFilters, setC
               {row.getVisibleCells().map(cell => (
                 <td
                   key={cell.id}
-                  className={cell.column.columnDef.accessorKey === 'detay' ? 'sticky-detail' : ''}
+                  className={
+                    (cell.column.columnDef.accessorKey !== 'detay' && cell.column.columnDef.isNumeric) ?
+                    'numeric-detail' :
+                    (cell.column.columnDef.accessorKey === 'detay' ? 'sticky-detail' : '')
+                  }
                 >
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
@@ -123,7 +127,11 @@ const ProductsTable = ({ data, columns, sorting, setSorting, columnFilters, setC
         <tfoot>
           <tr>
             {table.getHeaderGroups()[0].headers.map(header => (
-              <td key={header.id} className={header.column.columnDef.accessorKey === 'detay' ? 'sticky-detail' : ''}>
+              <td key={header.id} className={
+                (header.column.columnDef.accessorKey !== 'detay' && header.column.columnDef.isNumeric) ?
+                    'numeric-detail' :
+                (header.column.columnDef.accessorKey === 'detay' ? 'sticky-detail' : '')
+              }>
                 {footerSums[header.column.columnDef.accessorKey] !== undefined
                   ? parseFloat(footerSums[header.column.columnDef.accessorKey]).toFixed(2)
                   : null}

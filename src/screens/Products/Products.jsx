@@ -4,6 +4,9 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import HomeButton from '../../components/HomeButton/HomeButton';
+import Filtering from '../../components/Filtering/Filtering';
+
 import { AiFillX, AiOutlineArrowLeft, AiOutlineSearch, AiOutlineSync } from "react-icons/ai";
 import columns from './data/columns';
 
@@ -16,9 +19,23 @@ import { PiTrash } from 'react-icons/pi';
 const Products = () => {
   const navigate = useNavigate();
 
-  const handleHomeClick = () => {
-    navigate('/home');
-  }
+  // done--------------------------------------//
+  const [boxesVisible, setBoxesVisible] = useState(false);
+  const [visibleFilters, setVisibleFilters] = useState([]);
+  const handleClearFiltersClick = () => {     //
+    setInputs(columns.map(column => ({        //
+      id: column.accessorKey,                 //
+      value: '',                              //
+    })))                                      //
+    setVisibleFilters([])                     //
+  }                                           //
+  const [inputs, setInputs] = useState(
+    columns.map(column => ({
+      id: column.accessorKey,
+      value: '',
+    }))
+  );
+  //------------------------------------------//
 
   useEffect(() => {
     const localEmail = localStorage.getItem('email');
@@ -56,6 +73,7 @@ const Products = () => {
   const onRefreshClick = () => {
     const userToken = localStorage.getItem("temp_token");
     setRefreshDisabled(true);
+    setTableVisible(false)
 
     axios.post('https://duyu.alter.net.tr/api/GetWarehousesStocks', {
       token: "RasyoIoToken2021",
@@ -69,6 +87,7 @@ const Products = () => {
       })
       .finally(() => {
         setRefreshDisabled(false);
+        setTableVisible(true)
       })
   }
 
@@ -102,14 +121,7 @@ const Products = () => {
   }, [productCode])
 
   const [sorting, setSorting] = useState([])
-  const [boxesVisible, setBoxesVisible] = useState(false);
-  const [visibleFilters, setVisibleFilters] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
-  const [inputs, setInputs] = useState(
-    columns.map(column => ({
-      id: column.accessorKey,
-      value: '',
-    })));
 
   const data = productsDetails;
 
@@ -128,17 +140,11 @@ const Products = () => {
     ));
   }
 
-  const handleClearFiltersClick = () => {
-    setInputs(columns.map(column => ({
-      id: column.accessorKey,
-      value: '',
-    })))
-    setVisibleFilters([])
-  }
-
   const handleExpandFiltersClick = () => {
     setBoxesVisible(!boxesVisible);
   }
+
+
   const onSearchClick = () => {
     const nonEmptyFilters = inputs.filter(input => input.value !== '');
     setColumnFilters(nonEmptyFilters);
@@ -168,17 +174,14 @@ const Products = () => {
 
   console.log("renderPage");
 
-
   return (
     <div id='products-page-container'>
-      <div className='home-button' onClick={handleHomeClick}>
-        <AiOutlineArrowLeft /> Ana Sayfa
-      </div>
+      <HomeButton />
       <div id='products-report-container' style={{ width: showDetail.reportStyle }}>
         <div id='products-filters-section'>
           <div id='products-filters-expand-section'>
             <div id='products-filters-expand-and-remove'>
-              <div id={boxesVisible ? 'products-filters-expand-button-expanded' : 'products-filters-expand-button'} onClick={() => handleExpandFiltersClick(true)}>
+              <div id={boxesVisible ? 'products-filters-expand-button-expanded' : 'products-filters-expand-button'} onClick={() => handleExpandFiltersClick()}>
                 Filtreler
                 {boxesVisible ?
                   <FaChevronDown style={{ marginLeft: 5 }} fontSize={10} /> :
@@ -247,19 +250,21 @@ const Products = () => {
             setTableVisible={setTableVisible}
           />
           {!tableVisible &&
-            <div id='table-placeholder'>
-              Veriler yükleniyor. Lütfen Bekleyiniz...
+            <div id='table-placeholder-container'>
+              <div id='table-placeholder'>
+                Veriler yükleniyor. Lütfen Bekleyiniz...
+              </div>
             </div>
           }
         </div>
         <div id='refresh-and-pagination'>
-            <button
-              id={refreshDisabled ? 'products-refresh-button-disabled' : 'products-refresh-button'}
-              onClick={onRefreshClick}
-              disabled={refreshDisabled}
-            >
-              <AiOutlineSync />
-            </button>
+          <button
+            id={refreshDisabled ? 'products-refresh-button-disabled' : 'products-refresh-button'}
+            onClick={onRefreshClick}
+            disabled={refreshDisabled}
+          >
+            <AiOutlineSync />
+          </button>
           <Pagination table={tableState} setTablePageIndex={setTablePageIndex} tablePageIndex={tablePageIndex} tablePageCount={tablePageCount} />
         </div>
       </div>

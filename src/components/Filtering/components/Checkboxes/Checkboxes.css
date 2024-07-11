@@ -1,0 +1,24 @@
+#filter-checkboxes {
+  width: 95%;
+  margin-top: 0;
+  flex-wrap: wrap;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgb(241, 241, 241);
+  padding-top: 12px;
+  padding-bottom: 12px;
+  border: 1px solid gray;
+  border-radius: 6px;
+  padding-right: 12px;
+}
+
+.filter-checkbox-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: 4px;
+  margin-left: 20px;
+  font-size: 14px;
+  color: black;
+}

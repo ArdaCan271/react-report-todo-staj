@@ -1,0 +1,33 @@
+#expand-filters-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(241, 241, 241);
+  border: 1px solid gray;
+  border-radius: 3px;
+  padding: 2px;
+  z-index: 2;
+} #expand-filters-button:hover {
+  cursor: pointer;
+} #expand-filters-button:active {
+  background-color: rgb(221, 221, 221);
+}
+
+#expand-filters-button-expanded {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(241, 241, 241);
+  border: 1px solid gray;
+  border-radius: 3px;
+  padding: 2px;
+  border-bottom: none;
+  z-index: 2;
+  box-shadow: 0px 2px 0 rgb(241, 241, 241);
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+} #expand-filters-button-expanded:hover {
+  cursor: pointer;
+} #expand-filters-button-expanded:active {
+  background-color: rgb(221, 221, 221);
+}

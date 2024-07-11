@@ -1,0 +1,19 @@
+#products-filter-inputs-section {
+  width: 86%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+  column-gap: 30px;
+  row-gap: 15px;
+  flex-wrap: wrap;
+  margin-left: 2%;
+  margin-top: 10px;
+}
+
+.products-filter-input {
+  width: 150px;
+}
+
+.products-filter-input::placeholder {
+  font-style: italic;
+}
